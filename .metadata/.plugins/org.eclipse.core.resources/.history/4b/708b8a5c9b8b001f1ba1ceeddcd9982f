@@ -1,0 +1,35 @@
+package com.sps.service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+
+import org.springframework.stereotype.Service;
+
+
+
+@Service
+public class AddService {
+
+	public List<String> getAllStates() {
+		List<String> stateList = Arrays.asList("mh", "gujrat", "delhi");
+		return stateList;
+	}
+
+	public Optional<List<String>> getCitiesByState(String state) {
+		
+		List<String> stateList = Arrays.asList("Delhi");
+		if (state.equalsIgnoreCase("mh")) {
+			stateList = Arrays.asList("beed", "pune", "mumbai");
+			return Optional.of(stateList);
+		}
+		if (state.equalsIgnoreCase("gujrat")) {
+			stateList = Arrays.asList("ahmedabad", "aaa", "bbb");
+			return Optional.of(stateList);
+		}
+
+		return Optional.of(stateList);
+	}
+
+}

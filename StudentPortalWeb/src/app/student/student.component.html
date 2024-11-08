@@ -1,0 +1,127 @@
+<h2 style="text-align: center;">Student Portal Web</h2>
+
+<form (submit)="addStudent()" style="max-width: 600px; margin: auto; margin-top: 0; padding-top: 0; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td id="t1"><label for="name">Name</label></td>
+      <td>
+        <input type="text" [(ngModel)]="student.name" name="name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <div *ngIf="!student.name && submitted" style="color: red;">Name is required.</div>
+      </td>
+    </tr>
+    <tr>
+      <td id="t1"><label for="education">Education</label></td>
+      <td>
+        <input type="text" [(ngModel)]="student.education" name="education" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <div *ngIf="!student.education && submitted" style="color: red;">Education is required.</div>
+      </td>
+    </tr>
+
+    <tr>
+      <td id="t1"><label>Gender</label></td>
+      <td>
+        <label>
+          <input type="radio" [(ngModel)]="student.gender" name="gender" value="Male" required /> Male
+        </label>
+        <label>
+          <input type="radio" [(ngModel)]="student.gender" name="gender" value="Female" required /> Female
+        </label>
+        <div *ngIf="!student.gender && submitted" style="color: red;">Gender is required.</div>
+      </td>
+    </tr>
+    
+    <tr>
+      <td id="t1"><label>Subjects</label></td>
+      <td>
+        <label>
+          <input type="checkbox" (change)="onSubjectChange('Java')" /> Java
+        </label>
+        <label>
+          <input type="checkbox" (change)="onSubjectChange('Python')" /> Python
+        </label>
+        <label>
+          <input type="checkbox" (change)="onSubjectChange('DotNet')" /> DotNet
+        </label>
+      </td>
+    </tr>
+    
+    
+
+    <tr>
+      <td id="t1"><label for="state">State</label></td>
+      <td>
+        <select [(ngModel)]="student.state" name="state" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+          <option value="" disabled selected>Select a state</option>
+          <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+        </select>
+        <div *ngIf="!student.state && submitted" style="color: red;">State is required.</div>
+      </td>
+    </tr>
+    <tr>
+      <td id="t1"><label for="city">City</label></td>
+      <td>
+        <select [(ngModel)]="student.city" (focus)="getCities()" name="city" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+          <option value="" disabled selected>Select a city</option>
+          <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </select>
+        <div *ngIf="!student.city && submitted" style="color: red;">City is required.</div>
+      </td>
+    </tr>
+    <tr>
+      <td id="t1"><label for="email">Email</label></td>
+      <td>
+        <input type="email" [(ngModel)]="student.email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <div *ngIf="!student.email && submitted" style="color: red;">Email is required.</div>
+      </td>
+    </tr>
+    <tr>
+      <td id="t1"><label for="password">Password</label></td>
+      <td>
+        <div class="password-container" style="position: relative;">
+          <input [type]="isPasswordVisible ? 'text' : 'password'" [(ngModel)]="student.password" name="password" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+          <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" type="button" (click)="togglePasswordVisibility()">
+            {{ isPasswordVisible ? 'Hide' : 'Show' }}
+          </button>
+          <div *ngIf="!student.password && submitted" style="color: red;">Password is required.</div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: center;" id="t1">
+        <button type="submit" style="padding: 10px 15px; margin-top: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" (click)="submitted = true">Add Student</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<br>
+
+<table style="width: 70%; border-collapse: collapse; margin: auto; border: 1px solid #ccc;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #ccc; padding: 8px;">Name</th>
+      <th style="border: 1px solid #ccc; padding: 8px;">Education</th>
+      <th style="border: 1px solid #ccc; padding: 8px;">State</th>
+      <th style="border: 1px solid #ccc; padding: 8px;">City</th>
+      <th style="border: 1px solid #ccc; padding: 8px;">Email</th>
+      <th style="border: 1px solid #ccc; padding: 8px;">Gender</th> 
+      <th style="border: 1px solid #ccc; padding: 8px;">Subjects</th> 
+      <th style="border: 1px solid #ccc; padding: 8px;">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let st of students">
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.name }}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.education }}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.state }}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.city }}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.email }}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.gender }}</td> 
+      <td style="border: 1px solid #ccc; padding: 8px;">{{ st.subjects }}</td> 
+      <td style="border: 1px solid #ccc; padding: 8px;">
+        <button (click)="editStudent(st)" style="padding: 10px 15px; margin-top: 5px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Edit</button>
+        <button (click)="deleteStudent(st.email)" style="padding: 10px 15px; margin-top: 5px; margin-left: 10px; background-color: #d64c15; color: white; border: none; border-radius: 5px; cursor: pointer;">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

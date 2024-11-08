@@ -1,0 +1,38 @@
+package com.sps.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sps.modal.Address;
+
+import com.sps.repositories.AddressRepository;
+
+@Service
+public class AddService {
+
+	@Autowired
+	private AddressRepository addressRepository;
+
+	@SuppressWarnings("null")
+	public List<String> getAllStates() {
+		List<Address> adlist = addressRepository.findAll();
+
+		List<String> stateList = null;
+		for (Address addr : adlist) {
+			String str = addr.getState();
+			stateList.add(str);
+		}
+		return stateList;
+	}
+	
+	public List<String> getCitiesByState(String state){
+		List<Address> adlist = addressRepository.findAll();
+		
+		
+
+		List<String> stateList = null;
+	}
+
+}

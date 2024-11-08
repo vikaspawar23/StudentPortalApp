@@ -1,0 +1,5 @@
+package com.sps.service;
+
+public interface StudentService {
+
+}

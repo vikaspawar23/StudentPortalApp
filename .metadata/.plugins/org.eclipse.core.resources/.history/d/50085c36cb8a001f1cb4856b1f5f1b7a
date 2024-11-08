@@ -1,0 +1,5 @@
+package com.sps.repositories;
+
+public class AddressRepository {
+
+}
